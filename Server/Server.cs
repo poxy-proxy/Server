@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using Server.Models;
 using System.Linq;
 using System.Drawing;
+using System.IO;
 
 namespace Server
 {
@@ -44,6 +45,9 @@ namespace Server
 
         public Server()
         {
+            Icon icon = Icon.ExtractAssociatedIcon(@"C:\06.05\Server\Server\bin\Debug\vedi.ico");
+
+            this.Icon = icon;
             InitializeComponent();
             db = new ServerFirewalDBEntities1();
             listBoxSites.Items.AddRange(GetListSitesDB().ToArray());
@@ -166,6 +170,9 @@ namespace Server
                     }
                     totalLabel.Text = string.Format("Total clients: {0}", clientsDataGridView.Rows.Count);
                 });
+                System.Media.SoundPlayer player = new System.Media.SoundPlayer();
+                player.SoundLocation = Path.Combine(Environment.CurrentDirectory,  "Neco-Arc_disappears.wav");
+                player.Play();
             }
         }
 
@@ -535,7 +542,7 @@ namespace Server
             }
         }
 
-        private void Disconnect(long id = -1) // disconnect everyone if ID is not supplied or is lesser than zero
+        private void Disconnect(long id = -1) 
         {
             if (disconnect == null || !disconnect.IsAlive)
             {
@@ -560,6 +567,7 @@ namespace Server
                     IsBackground = true
                 };
                 disconnect.Start();
+               
             }
         }
 
@@ -577,16 +585,8 @@ namespace Server
 
         private void ClientsDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && e.ColumnIndex == 2)//clientsDataGridView.Columns["dc"].Index)
+            if (e.RowIndex >= 0 && e.ColumnIndex == 2)
             {
-                // long.TryParse(clientsDataGridView.Rows[e.RowIndex].Cells["identifier"].Value.ToString(), out long id);
-                //  Disconnect(id);
-              //  clientsDataGridView.Rows[e.RowIndex].Cells[3].Style.Font = new Font("Microsoft Sans Serif", 8, FontStyle.Bold);
-               // clientsDataGridView.Rows[e.RowIndex].Cells[3].Style.Font = new System.Drawing.Font(clientsDataGridView.Rows[e.RowIndex].Cells[3].Style.Font, FontStyle.Bold);
-                //new System.Drawing.Font(clientsDataGridView.Rows[e.RowIndex].Cells[3].Style.Font, FontStyle.Bold);
-                //clientsDataGridView.Rows[e.RowIndex].Cells[3].Value+=GetNameSelected() + "; ";
-                //  clientsDataGridView.Rows[e.RowIndex].Cells[3].Style.Font = new System.Drawing.Font(clientsDataGridView.Rows[e.RowIndex].Cells[3].Style.Font, FontStyle.Regular);
-                //clientsDataGridView.Rows[e.RowIndex].Cells[3].Style.Font = new System.Drawing.Font(clientsDataGridView.Rows[e.RowIndex].Cells[3].Style.Font, FontStyle.Regular);
 
                 if (listBoxSites.SelectedItem != null)
                 {
@@ -624,8 +624,13 @@ namespace Server
                     }
                 }
                 newStringMsg = string.Join(";", arMsg);
+
                 string ipCell= clientsDataGridView.Rows[e.RowIndex].Cells[1].Value.ToString();
                 string msg = "Запретить "+ipCell+" доступ в интернет, кроме сайтов:" + newStringMsg;
+                if (msg.Last() == ';')
+                {
+                    msg = msg.Substring(0, msg.Length - 1);
+                }
                 Log(string.Format("{0} (Вы): {1}", usernameTextBox.Text.Trim(), msg));
                 Send(string.Format("{0}: {1}", usernameTextBox.Text.Trim(), msg));
                 clientsDataGridView.Rows[e.RowIndex].Cells[4].Value = "Сайты разреш.";
@@ -639,9 +644,6 @@ namespace Server
                 Send(string.Format("{0}: {1}", usernameTextBox.Text.Trim(), msg));
                 clientsDataGridView.Rows[e.RowIndex].Cells[4].Value = "По умолчанию";
             }
-
-          
-
 
         }
 
@@ -673,6 +675,7 @@ namespace Server
             Log(string.Format("{0} (Вы): {1}", usernameTextBox.Text.Trim(), msg));
             Send(string.Format("{0}: {1}", usernameTextBox.Text.Trim(), msg));
             labelIntenetStatus.Text = "Интернет запрещён";
+            clearDataGridViewInternet();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -681,6 +684,7 @@ namespace Server
             Log(string.Format("{0} (Вы): {1}", usernameTextBox.Text.Trim(), msg));
             Send(string.Format("{0}: {1}", usernameTextBox.Text.Trim(), msg));
             labelIntenetStatus.Text = "Интернет разрешён";
+            clearDataGridViewInternet();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -723,26 +727,38 @@ namespace Server
             }
             var newStringMsg = string.Join(";", arMsg);
             string msg = "Запретить доступ в интернет, кроме сайтов:"+newStringMsg;
-          // Log(string.Format("{0} (Вы): {1}", usernameTextBox.Text.Trim(), msg));
-           // Send(string.Format("{0}: {1}", usernameTextBox.Text.Trim(), msg));
+            if (msg.Last() == ';')
+            {
+                msg = msg.Substring(0, msg.Length - 1);
+            }
+         //  Log(string.Format("{0} (Вы): {1}", usernameTextBox.Text.Trim(), msg));
+         //   Send(string.Format("{0}: {1}", usernameTextBox.Text.Trim(), msg));
             msg = "Запретить доступ в интернет, кроме сайтов:" + richTextBox1.Text;
             labelIntenetStatus.Text = msg;
+            clearDataGridViewInternet();
         }
 
-        // This event handler manually raises the CellValueChanged event 
-        // by calling the CommitEdit method. 
+        private void clearDataGridViewInternet()
+        {
+            for (int i = 0; i < clientsDataGridView.Rows.Count; i++)
+            {
+                clientsDataGridView.Rows[i].Cells[3].Value = "";
+                clientsDataGridView.Rows[i].Cells[4].Value = "По умолчанию";
+            }
+        }
+
+        
         void dataGridView1_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
             if (clientsDataGridView.IsCurrentCellDirty)
             {
-                // This fires the cell value changed handler below
+               
                 clientsDataGridView.CommitEdit(DataGridViewDataErrorContexts.Commit);
             }
         }
 
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            // My combobox column is the second one so I hard coded a 1, flavor to taste
             if (e.RowIndex >= 0)
             {
                 DataGridViewComboBoxCell cb = (DataGridViewComboBoxCell)clientsDataGridView.Rows[e.RowIndex].Cells[7];
@@ -773,7 +789,7 @@ namespace Server
                             Send(string.Format("{0}: {1}", usernameTextBox.Text.Trim(), msg));
                         }
                     }
-                    // do stuff
+           
                     clientsDataGridView.Invalidate();
                 }
             }

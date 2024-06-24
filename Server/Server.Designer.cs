@@ -31,12 +31,13 @@ namespace Server
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Server));
             this.startButton = new System.Windows.Forms.Button();
             this.portLabel = new System.Windows.Forms.Label();
             this.localaddrLabel = new System.Windows.Forms.Label();
@@ -48,6 +49,14 @@ namespace Server
             this.sendLabel = new System.Windows.Forms.Label();
             this.logLabel = new System.Windows.Forms.Label();
             this.clientsDataGridView = new System.Windows.Forms.DataGridView();
+            this.identifier = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dc = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.AllowSite = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AddRule = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.DeleteRule = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.FlashStatus = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.totalLabel = new System.Windows.Forms.Label();
             this.usernameLabel = new System.Windows.Forms.Label();
             this.usernameTextBox = new System.Windows.Forms.TextBox();
@@ -69,14 +78,6 @@ namespace Server
             this.textBoxListSites = new System.Windows.Forms.TextBox();
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
-            this.identifier = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IP = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dc = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.AllowSite = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AddRule = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.DeleteRule = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.FlashStatus = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.clientsDataGridView)).BeginInit();
@@ -208,14 +209,14 @@ namespace Server
             this.clientsDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.clientsDataGridView.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.clientsDataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle25.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle25.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle25.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle25.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle25.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.clientsDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle25;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.clientsDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.clientsDataGridView.ColumnHeadersHeight = 24;
             this.clientsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.clientsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -235,19 +236,19 @@ namespace Server
             this.clientsDataGridView.MultiSelect = false;
             this.clientsDataGridView.Name = "clientsDataGridView";
             this.clientsDataGridView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle29.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle29.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle29.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.clientsDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle29;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.clientsDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.clientsDataGridView.RowHeadersVisible = false;
             this.clientsDataGridView.RowHeadersWidth = 40;
             this.clientsDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle30.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle30.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            dataGridViewCellStyle30.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle30.SelectionBackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle30.SelectionForeColor = System.Drawing.Color.Black;
-            this.clientsDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle30;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
+            this.clientsDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.clientsDataGridView.RowTemplate.Height = 24;
             this.clientsDataGridView.RowTemplate.ReadOnly = true;
             this.clientsDataGridView.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -264,6 +265,81 @@ namespace Server
             this.clientsDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.clientsDataGridView_CellContentClick);
             this.clientsDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
             this.clientsDataGridView.CurrentCellDirtyStateChanged += new System.EventHandler(this.dataGridView1_CurrentCellDirtyStateChanged);
+            // 
+            // identifier
+            // 
+            this.identifier.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.identifier.DefaultCellStyle = dataGridViewCellStyle2;
+            this.identifier.HeaderText = "ID";
+            this.identifier.MaxInputLength = 20;
+            this.identifier.MinimumWidth = 20;
+            this.identifier.Name = "identifier";
+            this.identifier.Width = 30;
+            // 
+            // IP
+            // 
+            this.IP.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.IP.DefaultCellStyle = dataGridViewCellStyle3;
+            this.IP.HeaderText = "IP";
+            this.IP.MaxInputLength = 20;
+            this.IP.MinimumWidth = 20;
+            this.IP.Name = "IP";
+            this.IP.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // dc
+            // 
+            this.dc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dc.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dc.HeaderText = "Встав. из сп.";
+            this.dc.MinimumWidth = 20;
+            this.dc.Name = "dc";
+            this.dc.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dc.Text = "Вставить";
+            this.dc.UseColumnTextForButtonValue = true;
+            this.dc.Width = 80;
+            // 
+            // AllowSite
+            // 
+            this.AllowSite.HeaderText = "Разрешённые сайты";
+            this.AllowSite.Name = "AllowSite";
+            this.AllowSite.Width = 350;
+            // 
+            // Status
+            // 
+            this.Status.HeaderText = "Статус";
+            this.Status.Name = "Status";
+            this.Status.ReadOnly = true;
+            // 
+            // AddRule
+            // 
+            this.AddRule.HeaderText = "Доб. сайты";
+            this.AddRule.Name = "AddRule";
+            this.AddRule.Text = "Добавить";
+            this.AddRule.UseColumnTextForButtonValue = true;
+            // 
+            // DeleteRule
+            // 
+            this.DeleteRule.HeaderText = "Откл. сайты";
+            this.DeleteRule.Name = "DeleteRule";
+            this.DeleteRule.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.DeleteRule.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.DeleteRule.Text = "Отключить";
+            this.DeleteRule.UseColumnTextForButtonValue = true;
+            // 
+            // FlashStatus
+            // 
+            this.FlashStatus.HeaderText = "Флешки";
+            this.FlashStatus.Items.AddRange(new object[] {
+            "По умолчанию",
+            "Запрещено",
+            "Разрешено"});
+            this.FlashStatus.Name = "FlashStatus";
+            this.FlashStatus.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.FlashStatus.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // totalLabel
             // 
@@ -471,81 +547,6 @@ namespace Server
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
-            // identifier
-            // 
-            this.identifier.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.identifier.DefaultCellStyle = dataGridViewCellStyle26;
-            this.identifier.HeaderText = "ID";
-            this.identifier.MaxInputLength = 20;
-            this.identifier.MinimumWidth = 20;
-            this.identifier.Name = "identifier";
-            this.identifier.Width = 30;
-            // 
-            // IP
-            // 
-            this.IP.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.IP.DefaultCellStyle = dataGridViewCellStyle27;
-            this.IP.HeaderText = "IP";
-            this.IP.MaxInputLength = 20;
-            this.IP.MinimumWidth = 20;
-            this.IP.Name = "IP";
-            this.IP.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // dc
-            // 
-            this.dc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle28.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dc.DefaultCellStyle = dataGridViewCellStyle28;
-            this.dc.HeaderText = "Встав. из сп.";
-            this.dc.MinimumWidth = 20;
-            this.dc.Name = "dc";
-            this.dc.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dc.Text = "Вставить";
-            this.dc.UseColumnTextForButtonValue = true;
-            this.dc.Width = 80;
-            // 
-            // AllowSite
-            // 
-            this.AllowSite.HeaderText = "Разрешённые сайты";
-            this.AllowSite.Name = "AllowSite";
-            this.AllowSite.Width = 350;
-            // 
-            // Status
-            // 
-            this.Status.HeaderText = "Статус";
-            this.Status.Name = "Status";
-            this.Status.ReadOnly = true;
-            // 
-            // AddRule
-            // 
-            this.AddRule.HeaderText = "Доб. сайты";
-            this.AddRule.Name = "AddRule";
-            this.AddRule.Text = "Добавить";
-            this.AddRule.UseColumnTextForButtonValue = true;
-            // 
-            // DeleteRule
-            // 
-            this.DeleteRule.HeaderText = "Откл. сайты";
-            this.DeleteRule.Name = "DeleteRule";
-            this.DeleteRule.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.DeleteRule.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.DeleteRule.Text = "Отключить";
-            this.DeleteRule.UseColumnTextForButtonValue = true;
-            // 
-            // FlashStatus
-            // 
-            this.FlashStatus.HeaderText = "Флешки";
-            this.FlashStatus.Items.AddRange(new object[] {
-            "По умолчанию",
-            "Запрещено",
-            "Разрешено"});
-            this.FlashStatus.Name = "FlashStatus";
-            this.FlashStatus.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.FlashStatus.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -605,10 +606,10 @@ namespace Server
             this.Controls.Add(this.localaddrLabel);
             this.Controls.Add(this.portTextBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "Server";
-            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Сервер файерволл";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Server_FormClosing);
@@ -633,7 +634,7 @@ namespace Server
         private System.Windows.Forms.DataGridView clientsDataGridView;
         private System.Windows.Forms.Label totalLabel;
         private System.Windows.Forms.Label usernameLabel;
-        private System.Windows.Forms.TextBox usernameTextBox;
+        public System.Windows.Forms.TextBox usernameTextBox;
         private System.Windows.Forms.TextBox addrTextBox;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;

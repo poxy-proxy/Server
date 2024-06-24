@@ -1,14 +1,9 @@
 using Moq;
 using NUnit.Framework;
-using Server;
 using Server.Models;
-using System.Collections;
-using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace TsetServer
@@ -62,6 +57,21 @@ namespace TsetServer
             Assert.AreEqual("Запретить доступ в интернет, кроме сайтов:www.testsite.com", _server.labelIntenetStatus.Text);
         }
 
-  
+        [Test]
+        public void TextBoxUserNameIsCorrect()
+        {
+
+            var button = _server.usernameTextBox;
+            Assert.IsNotNull(button, "TextBox корректен");
+        }
+
+        [Test]
+        public void RichTextBoxIsCorrect()
+        {
+
+            var button = _server.usernameTextBox;
+            Assert.IsNotNull(button, "RichTextBox корректен");
+        }
+
     }
 }
